@@ -1,0 +1,8 @@
+py\com\progweb\prueba\ejb\CategoriaDAOImpl.class
+py\com\progweb\prueba\rest\CategoriaServiceImpl.class
+py\com\progweb\prueba\rest\RestPrueba.class
+py\com\progweb\prueba\rest\CategoriaService.class
+py\com\progweb\prueba\model\Categoria.class
+py\com\progweb\prueba\ejb\CategoriaDAO.class
+py\com\progweb\prueba\rest\ApplicationConfig.class
+py\com\progweb\prueba\rest\CategoriaController.class
