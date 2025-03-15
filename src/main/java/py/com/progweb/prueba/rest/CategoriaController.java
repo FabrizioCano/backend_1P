@@ -51,6 +51,7 @@ public class CategoriaController {
         try {
             Categoria categoria = categoriaService.encontrarCategoriaPorId(id);
             if (categoria != null) {
+                categoriaModificada.setIdCategoria(id);
                 categoriaService.modificarCategoria(categoriaModificada);
                 return Response.ok().entity(categoriaModificada).build();
             } else {
