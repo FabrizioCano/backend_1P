@@ -7,19 +7,24 @@
          data source, this example data source is just for development and testing! -->
       <!-- The datasource is deployed as ${ds-deployment-location}, you
          can find it in the source at postgres_local-ds.xml -->
-      <jta-data-source>java:jboss/datasources/prueba</jta-data-source>
+      <jta-data-source>java:jboss/datasources/ecommerce</jta-data-source>
       <class>py.com.progweb.prueba.model.Categoria</class>
       <class>py.com.progweb.prueba.model.Producto</class>
       <class>py.com.progweb.prueba.model.Cliente</class>
+      <class>py.com.progweb.prueba.model.VentaCabecera</class>
+      <class>py.com.progweb.prueba.model.VentaDetalle</class>
+
       <properties>
          <property name="hibernate.id.new_generator_mappings" value="true" />
          <property name="hibernate.show_sql" value="true" />
+         <property name="hibernate.format_sql" value="true" />
+         <property name="hibernate.use_sql_comments" value="true" />
+         <property name="hibernate.generate_statistics" value="true" />
+         <property name="org.hibernate.SQL" value="DEBUG" />
          <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
          <property name="hibernate.hbm2ddl.auto" value="update" />
-         <property name="javax.persistence.sql-load-script-source" value="META-INF/schema.sql" />
          <property name="hibernate.transaction.jta.platform"
             value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />
-         <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create" />
       </properties>
    </persistence-unit>
 </persistence>
