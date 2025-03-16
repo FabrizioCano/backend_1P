@@ -20,6 +20,7 @@ public class VentaServiceRS {
     private VentaService ventaService;
     @EJB
     private ClienteService clienteService;
+
     @POST
     @Path("/realizarVenta/{clienteid}")
     public Response realizarVenta(@PathParam("clienteid") Long clienteId, List<VentaDetalle> detalles) {
@@ -37,9 +38,16 @@ public class VentaServiceRS {
     }
 
     @GET
-    @Path("/all")
-    public List<VentaCabeceraDTO> listarVentas(@QueryParam("fecha") String fecha,
+    @Path("/")
+    public Response listarVentas(@QueryParam("fecha") String fecha,
             @QueryParam("clienteId") Long clienteId) {
-        return ventaService.listarVentas(fecha, clienteId);
+        List<VentaCabeceraDTO> ventas = ventaService.listarVentas(fecha, clienteId);
+        if (ventas.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("No se encontraron ventas registradas.")
+                    .build();
+        }
+
+        return Response.ok(ventas).build();
     }
 }
