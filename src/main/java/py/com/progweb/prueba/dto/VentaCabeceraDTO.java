@@ -1,9 +1,11 @@
 package py.com.progweb.prueba.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class VentaCabeceraDTO {
     private Long idVenta;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "America/Asuncion")
     private Date fecha;
     private Double total;
     private Long idCliente;
