@@ -13,6 +13,7 @@ import javax.ejb.EJB;
 @Produces("application/json")
 @Stateless
 public class ProductoServiceRS {   
+    
     @EJB
     private ProductoService productoService;
     
