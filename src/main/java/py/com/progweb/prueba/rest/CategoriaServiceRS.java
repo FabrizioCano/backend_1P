@@ -54,7 +54,9 @@ public class CategoriaServiceRS {
                 categoriaService.modificarCategoria(categoriaModificada);
                 return Response.ok().entity(categoriaModificada).build();
             } else {
-                return Response.status(Response.Status.NOT_FOUND).build();
+                return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Categoría con ID " + id + " no encontrada.")
+                    .build();
             }
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -67,7 +69,8 @@ public class CategoriaServiceRS {
     public Response eliminarCategoriaPorId(@PathParam("id") int id) {
         try {
             categoriaService.eliminarCategoria(new Categoria(id));
-            return Response.ok().build();
+            String mensaje="Categoría con ID " + id + " eliminada.";
+            return Response.ok().entity(mensaje).build();
         } catch (Exception e) {
             e.printStackTrace(System.out);
             return Response.status(Response.Status.NOT_FOUND).build();

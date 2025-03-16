@@ -8,7 +8,6 @@ py\com\progweb\prueba\ejb\CategoriaDAOImpl.class
 py\com\progweb\prueba\ejb\ClienteDAO.class
 py\com\progweb\prueba\ejb\ProductoDao.class
 py\com\progweb\prueba\ejb\VentasDAO.class
-py\com\progweb\prueba\rest\RestPrueba.class
 py\com\progweb\prueba\model\Categoria.class
 py\com\progweb\prueba\ejb\CategoriaDAO.class
 py\com\progweb\prueba\model\Cliente.class

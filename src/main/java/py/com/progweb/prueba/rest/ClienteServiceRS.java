@@ -69,7 +69,7 @@ public class ClienteServiceRS {
     @Path("/add")
     public Response addCliente(Cliente cliente) {
         clienteService.addCliente(cliente);
-        return Response.status(Response.Status.CREATED).build();
+        return Response.ok(cliente).build();
     }
 
     @PUT
@@ -81,14 +81,17 @@ public class ClienteServiceRS {
         }
         cliente.setIdCliente(idCliente);
         clienteService.updateCliente(cliente);
-        return Response.status(Response.Status.OK).build();
+        return Response.ok(cliente).build();
     }
 
     @DELETE
     @Path("/delete/{id}")
     public Response deleteCliente(@PathParam("id") Long idCliente) {
         clienteService.deleteCliente(idCliente);
-        return Response.status(Response.Status.NO_CONTENT).build();
+        String mensaje = "Cliente con ID " + idCliente + " eliminado correctamente.";
+        return Response.status(Response.Status.OK)
+               .entity(mensaje)
+               .build();
     }
 
 

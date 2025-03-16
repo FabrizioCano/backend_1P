@@ -58,6 +58,7 @@ public List<VentaCabeceraDTO> listarVentas(String fecha, Long clienteId) {
     @Override
     public void realizarVenta(Cliente cliente, List<VentaDetalle> detalles) throws Exception {
         double totalVenta = 0.0;
+        
         // Validar stock de productos
         for (VentaDetalle detalle : detalles) {
             Producto producto = productoDAO.findProductoById(detalle.getProducto().getIdProducto());
