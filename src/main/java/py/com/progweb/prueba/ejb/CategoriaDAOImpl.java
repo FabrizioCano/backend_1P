@@ -3,10 +3,8 @@ package py.com.progweb.prueba.ejb;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import py.com.progweb.prueba.model.Categoria;
-import javax.persistence.Query;
 
 @Stateless
 public class CategoriaDAOImpl implements CategoriaDAO {

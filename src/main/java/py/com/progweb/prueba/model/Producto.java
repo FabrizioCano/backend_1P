@@ -1,9 +1,7 @@
 package py.com.progweb.prueba.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import java.io.Serializable;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "producto")

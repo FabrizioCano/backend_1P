@@ -1,6 +1,5 @@
 package py.com.progweb.prueba.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
