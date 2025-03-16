@@ -6,7 +6,6 @@ import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import py.com.progweb.prueba.ejb.ProductoDao;
-import py.com.progweb.prueba.model.Categoria;
 import py.com.progweb.prueba.model.Producto;
 
 @Stateless
@@ -19,8 +18,16 @@ public class ProductoServiceImpl implements ProductoService {
     private SessionContext sessionContext;
 
     @Override
-    public List<Producto> listarProductos() {
-        return productoDao.findAllProductos();
+    public List<Producto> listarProductos(String nombre, Integer idCategoria) {
+        if (nombre != null && idCategoria != null) {
+            return productoDao.findProductoByNombreAndCategoria(nombre, idCategoria);
+        } else if (nombre != null) {
+            return productoDao.findProductoByNombre(nombre);
+        } else if (idCategoria != null) {
+            return productoDao.findProductoByCategoria(idCategoria);
+        } else {
+            return productoDao.findAllProductos();
+        }
     }
 
     @Override
@@ -28,15 +35,6 @@ public class ProductoServiceImpl implements ProductoService {
         return productoDao.findProductoById(id);
     }
 
-    @Override
-    public List<Producto> encontrarProductoPorNombre(Producto producto) {
-        return productoDao.findProductoByNombre(producto);
-    }
-    
-    @Override
-    public List<Producto> encontrarProductoPorCategoria(Categoria categoria) {
-        return productoDao.findProductoByCategoria(categoria);
-    }
 
     @Override
     public void registrarProducto(Producto producto) {

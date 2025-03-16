@@ -1,7 +1,6 @@
 package py.com.progweb.prueba.rest;
 
 import java.util.List;
-import py.com.progweb.prueba.model.Categoria;
 import py.com.progweb.prueba.model.Producto;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
@@ -17,8 +16,12 @@ public class ProductoServiceRS {
     private ProductoService productoService;
     
     @GET
-    public List<Producto> listarProductos() {
-        return productoService.listarProductos();
+    public Response listarProductos(@QueryParam("nombre") String nombre, @QueryParam("idCategoria") Integer idCategoria) {
+        List<Producto> productos = productoService.listarProductos(nombre, idCategoria);
+        if (productos == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(productos).build();
     }
     
     @GET
@@ -30,18 +33,7 @@ public class ProductoServiceRS {
         }
         return Response.ok(producto).build();
     }
-    
-    @GET
-    @Path("/nombre")
-    public List<Producto> encontrarProductoPorNombre(Producto producto) {
-        return productoService.encontrarProductoPorNombre(producto);
-    }
-    
-    @GET
-    @Path("/categoria")
-    public List<Producto> encontrarProductoPorCategoria(Categoria categoria) {
-        return productoService.encontrarProductoPorCategoria(categoria);
-    }
+
     
     @POST
     public Response registrarProducto(Producto producto) {
@@ -50,14 +42,32 @@ public class ProductoServiceRS {
     }
     
     @PUT
-    public Response modificarProducto(Producto producto) {
-        productoService.modificarProducto(producto);
-        return Response.ok().build();
+    @Path("/{id}")
+    public Response modificarProducto(@PathParam("id") Integer id, Producto productoModificado) {
+        try {
+            Producto producto = productoService.encontrarProductoPorId(id);
+            if (producto != null) {
+                productoModificado.setIdProducto(id);
+                productoService.modificarProducto(productoModificado);
+                return Response.ok().entity(productoModificado).build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
     }
     
     @DELETE
-    public Response eliminarProducto(Producto producto) {
-        productoService.eliminarProducto(producto);
-        return Response.ok().build();
+    @Path("/{id}")
+    public Response eliminarProductoPorId(@PathParam("id") Integer id) {
+        try {
+            productoService.eliminarProducto(new Producto(id));
+            return Response.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

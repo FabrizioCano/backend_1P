@@ -35,26 +35,40 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public List<Producto> findProductoByNombre(Producto producto) {
+    public List<Producto> findProductoByNombre(String nombre) {
         List<Producto> productos = em.createNamedQuery("Producto.findByNombre", Producto.class)
-                .setParameter("nombre", producto.getNombre())
+                .setParameter("nombre", nombre)
                 .getResultList();
-        
+
         if (productos.isEmpty()) {
-            System.out.println("No se encontraron productos con el nombre: " + producto.getNombre());
+            System.out.println("No se encontraron productos con el nombre: " + nombre);
         }
 
         return productos;
     }
 
     @Override
-    public List<Producto> findProductoByCategoria(Categoria categoria) {
+    public List<Producto> findProductoByCategoria(Integer idCategoria) {
         List<Producto> productos = em.createNamedQuery("Producto.findByCategoria", Producto.class)
-                .setParameter("idCategoria", categoria.getIdCategoria())
+                .setParameter("idCategoria", idCategoria)
                 .getResultList();
 
         if (productos.isEmpty()) {
-            System.out.println("No se encontraron productos en la categoría: " + categoria.getNombre());
+            System.out.println("No se encontraron productos con la categoria: " + idCategoria);
+        }
+
+        return productos;
+    }
+
+    @Override
+    public List<Producto> findProductoByNombreAndCategoria(String nombre, Integer idCategoria) {
+        List<Producto> productos = em.createNamedQuery("Producto.findByNombreAndCategoria", Producto.class)
+                .setParameter("nombre", nombre)
+                .setParameter("idCategoria", idCategoria)
+                .getResultList();
+
+        if (productos.isEmpty()) {
+            System.out.println("No se encontraron productos con el nombre: " + nombre + " y la categoria: " + idCategoria);
         }
 
         return productos;
