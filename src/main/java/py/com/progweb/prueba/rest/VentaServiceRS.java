@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import javax.ejb.EJB;
+import py.com.progweb.prueba.utils.Mail;
 
 @Path("/ventas")
 @Consumes("application/json")
@@ -31,6 +32,10 @@ public class VentaServiceRS {
             }
 
             ventaService.realizarVenta(cliente, detalles);
+            String message = "Hola " + cliente.getNombre() + " " + cliente.getApellido() +
+                    ",\n\nGracias por su compra. " +
+                    ".\n\nSaludos,\nSu tienda";
+            Mail.enviarCorreo(cliente.getEmail(), "Confirmación de compra", message);
             return Response.ok("Venta registrada correctamente").build();
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
