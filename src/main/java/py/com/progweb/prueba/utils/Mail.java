@@ -7,7 +7,7 @@ import javax.mail.internet.*;
 public class Mail {
     public static void enviarCorreo(String destinatario, String asunto, String cuerpo) {
         String remitente = "cesaralonso99@gmail.com";
-        String password = "cpxtfrwixjvmevwx";
+        String password = "wwzjgtygcliolyfv";
         String host = "smtp.gmail.com";
         String port = "587";
 

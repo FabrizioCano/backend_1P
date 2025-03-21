@@ -80,5 +80,4 @@ public class VentaDetalle {
     public Double getSubtotal() {
         return this.cantidad * this.precio;
     }
-
 }

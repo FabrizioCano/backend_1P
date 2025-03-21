@@ -1,15 +1,21 @@
 package py.com.progweb.prueba.dto;
-import py.com.progweb.prueba.model.Producto;
+
 public class VentaDetalleDTO {
     private Long idVentaDetalle;
-    private Producto producto;
+    private Integer idProducto;
+    private String nombreProducto;
+    private Integer idCategoria;
+    private String nombreCategoria;
     private Integer cantidad;
     private Double precioUnitario;
     private Double totalDetalle;
 
-    public VentaDetalleDTO(Long idVentaDetalle, Producto producto, Integer cantidad, Double precioUnitario, Double precioTotalDetalle) {
+    public VentaDetalleDTO(Long idVentaDetalle, Integer idProducto, String nombreProducto, Integer idCategoria, String nombreCategoria, Integer cantidad, Double precioUnitario, Double precioTotalDetalle) {
         this.idVentaDetalle = idVentaDetalle;
-        this.producto = producto;
+        this.idProducto = idProducto;
+        this.nombreProducto = nombreProducto;
+        this.idCategoria = idCategoria;
+        this.nombreCategoria = nombreCategoria;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
         this.totalDetalle = precioTotalDetalle;
@@ -23,12 +29,36 @@ public class VentaDetalleDTO {
         this.idVentaDetalle = idVentaDetalle;
     }
 
-    public Producto getProducto() {
-        return producto;
+    public Integer getIdProducto() {
+        return idProducto;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public void setIdProducto(Integer idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    public Integer getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public String getNombreCategoria() {
+        return nombreCategoria;
+    }
+
+    public void setNombreCategoria(String nombreCategoria) {
+        this.nombreCategoria = nombreCategoria;
     }
 
     public Integer getCantidad() {

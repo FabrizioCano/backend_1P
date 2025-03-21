@@ -1,7 +1,6 @@
 package py.com.progweb.prueba.rest;
 
 import py.com.progweb.prueba.model.Cliente;
-import py.com.progweb.prueba.model.VentaCabecera;
 import py.com.progweb.prueba.dto.VentaCabeceraDTO;
 import py.com.progweb.prueba.dto.VentaDetalleDTO;
 import py.com.progweb.prueba.model.VentaDetalle;
@@ -69,6 +68,4 @@ public class VentaServiceRS {
 
         return Response.ok(detalles).build();
     }
-
-
 }

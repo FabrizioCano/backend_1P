@@ -106,23 +106,4 @@ public class VentaCabecera {
     public void calcularTotalVenta() {
         this.total = this.calcularTotal();
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idVenta != null ? idVenta.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof VentaCabecera)) {
-            return false;
-        }
-        VentaCabecera other = (VentaCabecera) object;
-        if ((this.idVenta == null && other.idVenta != null) || (this.idVenta != null && !this.idVenta.equals(other.idVenta))) {
-            return false;
-        }
-        return true;
-    }
 }

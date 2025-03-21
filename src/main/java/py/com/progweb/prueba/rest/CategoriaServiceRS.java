@@ -44,6 +44,7 @@ public class CategoriaServiceRS {
     }
 
     @POST
+    @Path("/add")
     public Response agregarCategoria(Categoria categoria) {
         try {
             categoriaService.registrarCategoria(categoria);
@@ -56,7 +57,7 @@ public class CategoriaServiceRS {
     }
 
     @PUT
-    @Path("/{id}")
+    @Path("/update/{id}")
     public Response modificarCategoria(@PathParam("id") int id, Categoria categoriaModificada) {
         try {
             Categoria categoria = categoriaService.encontrarCategoriaPorId(id);
@@ -77,7 +78,7 @@ public class CategoriaServiceRS {
     }
 
     @DELETE
-    @Path("/{id}")
+    @Path("/delete/{id}")
     public Response eliminarCategoriaPorId(@PathParam("id") int id) {
         try {
             Categoria categoria = categoriaService.encontrarCategoriaPorId(id);

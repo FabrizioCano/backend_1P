@@ -79,31 +79,4 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idCliente != null ? idCliente.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cliente)) {
-            return false;
-        }
-        Cliente other = (Cliente) object;
-        if ((this.idCliente == null && other.idCliente != null) || (this.idCliente != null && !this.idCliente.equals(other.idCliente))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "py.fpuna.backend.domain.Cliente[ idCliente=" + idCliente + " ]";
-    }
-    
 }

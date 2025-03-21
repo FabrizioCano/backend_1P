@@ -1,7 +1,6 @@
 package py.com.progweb.prueba.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "producto")
@@ -17,9 +16,7 @@ import java.io.Serializable;
     @NamedQuery(name = "Producto.findByNombreAndCategoria",
                 query = "SELECT p FROM Producto p WHERE LOWER(p.nombre) LIKE LOWER(:nombre) AND p.categoria IS NOT NULL AND p.categoria.idCategoria = :idCategoria")
 })
-public class Producto implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -93,26 +90,4 @@ public class Producto implements Serializable {
     public void setCantidadExistente(int cantidadExistente) {
         this.cantidadExistente = cantidadExistente;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idProducto != null ? idProducto.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Producto)) {
-            return false;
-        }
-        Producto other = (Producto) object;
-        return !((this.idProducto == null && other.idProducto != null) || (this.idProducto != null && !this.idProducto.equals(other.idProducto)));
-    }
-
-    @Override
-    public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", categoria=" + categoria + ", precioVenta=" + precioVenta + ", cantidadExistente=" + cantidadExistente + '}';
-    }
-
 }

@@ -56,10 +56,8 @@ public class VentaServiceImpl implements VentaService {
     @Override
     public List<VentaDetalleDTO> listarDetallesVenta(Long idVenta) {
         String queryString = "SELECT new py.com.progweb.prueba.dto.VentaDetalleDTO(" +
-                "vd.idVentaDetalle, p, vd.cantidad, vd.precio, (vd.cantidad * vd.precio)) " +
-                "FROM VentaDetalle vd " +
-                "JOIN vd.producto p " +     
-                "WHERE vd.venta.idVenta = :idVenta";
+                "vd.idVentaDetalle, vd.producto.idProducto, vd.producto.nombre, vd.producto.categoria.idCategoria, vd.producto.categoria.nombre, vd.cantidad, vd.precio, (vd.cantidad * vd.precio)) " +
+                "FROM VentaDetalle vd WHERE vd.venta.idVenta = :idVenta";
 
         TypedQuery<VentaDetalleDTO> query = entityManager.createQuery(queryString, VentaDetalleDTO.class);
         query.setParameter("idVenta", idVenta);

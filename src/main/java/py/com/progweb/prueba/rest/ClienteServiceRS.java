@@ -40,51 +40,8 @@ public class ClienteServiceRS {
         return Response.ok(cliente).build();
     }
 
-    @GET
-    @Path("/{nombre}")
-    public Response getClienteByNombre(@PathParam("nombre") String nombre) {
-        List<Cliente> clientes = clienteService.getClienteByNombre(nombre);
-        if (clientes == null) {
-            return Response.status(Response.Status.NOT_FOUND).entity("Cliente con nombre " + nombre + " no encontrado")
-                    .build();
-        }
-        return Response.ok(clientes).build();
-    }
-
-    @GET
-    @Path("/{apellido}")
-    public Response getClienteByApellido(@PathParam("apellido") String apellido) {
-        List<Cliente> clientes = clienteService.getClienteByApellido(apellido);
-        if (clientes == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Cliente con apellido " + apellido + " no encontrado").build();
-        }
-        return Response.ok(clientes).build();
-    }
-
-    @GET
-    @Path("/{cedula}")
-    public Response getClienteByCedula(@PathParam("cedula") String cedula) {
-        Cliente cliente = clienteService.getClienteByCedula(cedula);
-        if (cliente == null) {
-            return Response.status(Response.Status.NOT_FOUND).entity("Cliente con cedula " + cedula + " no encontrado")
-                    .build();
-        }
-        return Response.ok(cliente).build();
-    }
-
-    @GET
-    @Path("/{email}")
-    public Response getClienteByEmail(@PathParam("email") String email) {
-        Cliente cliente = clienteService.getClienteByEmail(email);
-        if (cliente == null) {
-            return Response.status(Response.Status.NOT_FOUND).entity("Cliente con email " + email + " no encontrado")
-                    .build();
-        }
-        return Response.ok(cliente).build();
-    }
-
     @POST
+    @Path("/add")
     public Response addCliente(Cliente cliente) {
         try {
             clienteService.addCliente(cliente);
@@ -96,7 +53,7 @@ public class ClienteServiceRS {
     }
 
     @PUT
-    @Path("/{id}")
+    @Path("/update/{id}")
     public Response updateCliente(@PathParam("id") Long idCliente, Cliente cliente) {
         try {
             Cliente c = clienteService.getClienteById(idCliente);
@@ -113,7 +70,7 @@ public class ClienteServiceRS {
     }
 
     @DELETE
-    @Path("/{id}")
+    @Path("/delete/{id}")
     public Response deleteCliente(@PathParam("id") Long idCliente) {
         try {
             Cliente cliente = clienteService.getClienteById(idCliente);

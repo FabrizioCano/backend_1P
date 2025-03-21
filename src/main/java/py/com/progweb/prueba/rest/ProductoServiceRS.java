@@ -22,6 +22,7 @@ public class ProductoServiceRS {
     CategoriaService categoriaService;
 
     @GET
+    @Path("/all")
     public Response listarProductos(@QueryParam("nombre") String nombre,
             @QueryParam("idCategoria") Integer idCategoria) {
         List<Producto> productos = productoService.listarProductos(nombre, idCategoria);
@@ -46,6 +47,7 @@ public class ProductoServiceRS {
     }
 
     @POST
+    @Path("/add")
     public Response registrarProducto(Producto producto) {
         try {
             if (producto.getCategoria() == null || producto.getCategoria().getIdCategoria() == null) {
@@ -71,7 +73,7 @@ public class ProductoServiceRS {
     }
 
     @PUT
-    @Path("/{id}")
+    @Path("/update/{id}")
     public Response modificarProducto(@PathParam("id") Integer id, Producto productoModificado) {
         try {
             Producto producto = productoService.encontrarProductoPorId(id);
@@ -105,7 +107,7 @@ public class ProductoServiceRS {
     }
 
     @DELETE
-    @Path("/{id}")
+    @Path("/delete/{id}")
     public Response eliminarProductoPorId(@PathParam("id") Integer id) {
         try {
             Producto producto = productoService.encontrarProductoPorId(id);
