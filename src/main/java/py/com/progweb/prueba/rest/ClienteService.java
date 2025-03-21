@@ -12,5 +12,5 @@ public interface ClienteService {
     public Cliente getClienteByEmail(String email);
     public void addCliente(Cliente cliente);
     public void updateCliente(Cliente cliente);
-    public void deleteCliente(Long idCliente);
+    public void deleteCliente(Cliente idCliente);
 }

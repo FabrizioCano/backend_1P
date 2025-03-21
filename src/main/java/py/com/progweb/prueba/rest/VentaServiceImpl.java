@@ -6,7 +6,7 @@ import py.com.progweb.prueba.model.Cliente;
 import py.com.progweb.prueba.ejb.VentasDAO;
 import py.com.progweb.prueba.model.VentaCabecera;
 import py.com.progweb.prueba.dto.VentaCabeceraDTO;
-
+import py.com.progweb.prueba.dto.VentaDetalleDTO;
 import py.com.progweb.prueba.model.VentaDetalle;
 
 import javax.ejb.Stateless;
@@ -49,6 +49,20 @@ public class VentaServiceImpl implements VentaService {
         if (clienteId != null) {
             query.setParameter("clienteId", clienteId);
         }
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<VentaDetalleDTO> listarDetallesVenta(Long idVenta) {
+        String queryString = "SELECT new py.com.progweb.prueba.dto.VentaDetalleDTO(" +
+                "vd.idVentaDetalle, p, vd.cantidad, vd.precio, (vd.cantidad * vd.precio)) " +
+                "FROM VentaDetalle vd " +
+                "JOIN vd.producto p " +     
+                "WHERE vd.venta.idVenta = :idVenta";
+
+        TypedQuery<VentaDetalleDTO> query = entityManager.createQuery(queryString, VentaDetalleDTO.class);
+        query.setParameter("idVenta", idVenta);
 
         return query.getResultList();
     }

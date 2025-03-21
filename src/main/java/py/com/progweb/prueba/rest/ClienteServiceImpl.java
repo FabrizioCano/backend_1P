@@ -64,9 +64,7 @@ public class ClienteServiceImpl implements ClienteService{
     }
 
     @Override
-    public void deleteCliente(Long idCliente) {
-        Cliente cliente = new Cliente();
-        cliente.setIdCliente(idCliente);
+    public void deleteCliente(Cliente cliente) {
         clienteDAO.deleteCliente(cliente);
     }
 }

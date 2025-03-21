@@ -1,7 +1,9 @@
 package py.com.progweb.prueba.rest;
 
 import py.com.progweb.prueba.model.Cliente;
+import py.com.progweb.prueba.model.VentaCabecera;
 import py.com.progweb.prueba.dto.VentaCabeceraDTO;
+import py.com.progweb.prueba.dto.VentaDetalleDTO;
 import py.com.progweb.prueba.model.VentaDetalle;
 
 import java.util.List;
@@ -38,7 +40,7 @@ public class VentaServiceRS {
     }
 
     @GET
-    @Path("/")
+    @Path("/listarVentas")
     public Response listarVentas(@QueryParam("fecha") String fecha,
             @QueryParam("clienteId") Long clienteId) {
         List<VentaCabeceraDTO> ventas = ventaService.listarVentas(fecha, clienteId);
@@ -50,4 +52,18 @@ public class VentaServiceRS {
 
         return Response.ok(ventas).build();
     }
+    @GET
+    @Path("/detalleVenta/{idVenta}")
+    public Response listarDetallesVenta(@PathParam("idVenta") Long idVenta) {
+        List<VentaDetalleDTO> detalles = ventaService.listarDetallesVenta(idVenta);
+        if (detalles.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("No se encontraron detalles de la venta.")
+                    .build();
+        }
+
+        return Response.ok(detalles).build();
+    }
+
+
 }
