@@ -30,7 +30,7 @@ public class Mail {
             message.setSubject(asunto);
             message.setText(cuerpo);
             Transport.send(message);
-            System.out.println("Correo electrónico enviado correctamente.");
+            System.out.println("Correo electronico enviado correctamente.");
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
