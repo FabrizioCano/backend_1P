@@ -54,18 +54,35 @@ public class ClienteServiceRS {
 
     @PUT
     @Path("/update/{id}")
-    public Response updateCliente(@PathParam("id") Long idCliente, Cliente cliente) {
+    public Response updateCliente(@PathParam("id") Long idCliente, Cliente clienteModificado) {
         try {
-            Cliente c = clienteService.getClienteById(idCliente);
-            if (c == null) {
-                return Response.status(Response.Status.NOT_FOUND).entity("Error al modificar el cliente").build();
+            Cliente clienteExistente = clienteService.getClienteById(idCliente);
+            if (clienteExistente == null) {
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("Cliente con ID " + idCliente + " no encontrado").build();
             }
-            cliente.setIdCliente(idCliente);
-            clienteService.updateCliente(cliente);
-            return Response.ok(cliente).build();
-        }catch(Exception e){
+
+            // Actualizar solo los campos no nulos
+            if (clienteModificado.getNombre() != null) {
+                clienteExistente.setNombre(clienteModificado.getNombre());
+            }
+            if (clienteModificado.getApellido() != null) {
+                clienteExistente.setApellido(clienteModificado.getApellido());
+            }
+            if (clienteModificado.getCedula() != null) {
+                clienteExistente.setCedula(clienteModificado.getCedula());
+            }
+            if (clienteModificado.getEmail() != null) {
+                clienteExistente.setEmail(clienteModificado.getEmail());
+            }
+
+            clienteService.updateCliente(clienteExistente);
+
+            return Response.ok(clienteExistente).build();
+        } catch (Exception e) {
             e.printStackTrace(System.out);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error al modificar el cliente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error al modificar el cliente")
+                    .build();
         }
     }
 
@@ -75,18 +92,21 @@ public class ClienteServiceRS {
         try {
             Cliente cliente = clienteService.getClienteById(idCliente);
             if (cliente == null) {
-                return Response.status(Response.Status.NOT_FOUND).entity("Cliente con ID " + idCliente + " no encontrado.")
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("Cliente con ID " + idCliente + " no encontrado.")
                         .build();
             }
 
             clienteService.deleteCliente(cliente);
-            String mensaje = "Cliente " + cliente.getNombre() + " " + cliente.getApellido() + " eliminado correctamente.";
+            String mensaje = "Cliente " + cliente.getNombre() + " " + cliente.getApellido()
+                    + " eliminado correctamente.";
             return Response.status(Response.Status.OK)
                     .entity(mensaje)
                     .build();
         } catch (Exception e) {
             e.printStackTrace(System.out);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error al eliminar el cliente").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error al eliminar el cliente")
+                    .build();
         }
     }
 

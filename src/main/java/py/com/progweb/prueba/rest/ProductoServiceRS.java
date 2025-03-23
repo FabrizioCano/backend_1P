@@ -82,23 +82,29 @@ public class ProductoServiceRS {
                         .build();
             }
 
-            // Verificar si la categoría fue modificada
-            if (productoModificado.getCategoria() != null && productoModificado.getCategoria().getIdCategoria() != null) {
-                // Buscar la nueva categoría en la base de datos
-                Categoria nuevaCategoria = categoriaService.encontrarCategoriaPorId(productoModificado.getCategoria().getIdCategoria());
+            // Actualizar solo los campos que no sean null en productoModificado
+            if (productoModificado.getNombre() != null) {
+                producto.setNombre(productoModificado.getNombre());
+            }
+            if (productoModificado.getPrecioVenta() != 0) {
+                producto.setPrecioVenta(productoModificado.getPrecioVenta());
+            }
+            if (productoModificado.getCantidadExistente() != 0) {
+                producto.setCantidadExistente(productoModificado.getCantidadExistente());
+            }
+            if (productoModificado.getCategoria() != null
+                    && productoModificado.getCategoria().getIdCategoria() != null) {
+                Categoria nuevaCategoria = categoriaService
+                        .encontrarCategoriaPorId(productoModificado.getCategoria().getIdCategoria());
                 if (nuevaCategoria == null) {
                     return Response.status(Response.Status.NOT_FOUND).entity("Categoría no encontrada").build();
                 }
-                productoModificado.setCategoria(nuevaCategoria);
-            } else {
-                // Mantener la categoría actual
-                productoModificado.setCategoria(producto.getCategoria());
+                producto.setCategoria(nuevaCategoria);
             }
 
-            productoModificado.setIdProducto(id);
-            productoService.modificarProducto(productoModificado);
+            productoService.modificarProducto(producto);
 
-            return Response.ok().entity(productoModificado).build();
+            return Response.ok().entity(producto).build();
         } catch (Exception e) {
             e.printStackTrace(System.out);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error al modificar el producto")

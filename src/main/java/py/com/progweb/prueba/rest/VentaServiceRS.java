@@ -36,7 +36,7 @@ public class VentaServiceRS {
             String message = "Hola " + cliente.getNombre() + " " + cliente.getApellido() +
                     ",\n\nGracias por su compra. " +
                     ".\n\nSaludos,\nSu tienda";
-            Mail.enviarCorreo(cliente.getEmail(), "Confirmación de compra", message);
+            Mail.enviarCorreo(cliente.getEmail(), "Confirmacion de compra", message);
             return Response.ok("Venta registrada correctamente").build();
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
